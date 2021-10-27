@@ -1,7 +1,7 @@
 import { config, DynamoDB } from 'aws-sdk';
 
 config.update({
-    region:'ap-southeast-2',
+    region:'local',
     accessKeyId: 'fakeMyKeyId',      
     accessSecretKey: 'fakeSecretAccessKey', 
     endpoint:"http://localhost:8000"
