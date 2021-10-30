@@ -81,6 +81,36 @@ router.get('/:id',function(req,res){
     })
 })
 
+// Update employee
+router.put("/:id",function(req,res){
+    var empId = Number(req.params.id);
+    var params={
+        TableName:table,
+        Key:{
+            "empId":empId
+        },
+        UpdateExpression: "set info.firstName = :f, info.surName=:s, info.email=:e, info.dob=:d, info.gender=:g",
+        ExpressionAttributeValues:{
+            ':f' :req.body.firstName,
+            ':s':req.body.surName,
+            ':e' :req.body.email,
+            ':d': req.body.dob,
+            ':g' :req.body.gender
+        },
+        ReturnValues:"UPDATED_NEW"        
+    };
+    docClnt.update(params,function(err,data){
+        if(err){
+            res.sendStatus(400)
+            console.log("Unable to update Employee",empId,JSON.stringify(err,null,2))
+        }else{
+            res.sendStatus(200)
+            console.log("Successfully updated",JSON.stringify(data,null,2))
+        }
+    });
+});
+
+
 //Delete Employee
 router.delete('/:id',function(req,res){
     var empId =  Number(req.params.id);
