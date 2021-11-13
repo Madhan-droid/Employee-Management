@@ -1,18 +1,20 @@
-const express = require('express');
-const cors=require('cors');
-const createServer=require('http');
-const employeeRouter = require('./routes/employeeRouter');
+const express = require("express");
+const cors = require('cors');
+var employeeRouter = require('./routes/employeeRouter')
 
+const port = 3000;
 const app = express();
+
 app.use(cors());
-const port = 5000;
 
+app.use(express.json());
 
-app.use('/employee' , employeeRouter);
-  
+app.use('/employee',employeeRouter);
+
 app.use("/",function(req,res){
-    res.send("Employee Page");
+    res.send("Employee Api");
 });
 
-app.listen(port);
-console.debug(`Server listening  to port ${port}`);
+app.listen(port, (req,res)=>{
+    console.debug(`server running on ${port}`);
+})
