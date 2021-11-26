@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const GENDER_DEFAULT='Female';
+const GENDER_DEFAULT='Male';
 
 ReactDOM.render(
 
