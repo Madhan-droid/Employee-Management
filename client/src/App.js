@@ -1,20 +1,22 @@
 import React from 'react';
 import Axios from 'axios';
+import validator from 'validator';
 import './App.css'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(input) {
+    super();
     this.state = {
         empId : '',
         firstName : '',
         surName : '',
         email : '',
         dob : '',
-        gender : '',    
+        gender : input.gender,
         hideEmpId : true,
         status : 'Create New Employee',
-        buttonState : 'Create'
+        buttonState : 'Create',
+        setEmailError : ''
     };
     this.employeeUrl = 'http://localhost:3000/employee';
   }
@@ -22,7 +24,10 @@ class App extends React.Component {
   changeHandler = event => {
     let name = event.target.name;
     let value = event.target.value;
+
     this.setState({[name]: value});
+
+    
   }
 
  readUpdateDeleteEmp = (mode) => {
@@ -96,6 +101,18 @@ updateDelEmployee = (event) =>{
       this.addNewEmp();
    }
 }
+wrapperFunction = ( ) => {
+  
+  
+  if (validator.isEmail(this.state.email)) 
+          {
+             this.updateDelEmployee();
+           } else {
+             alert("Incorrect email")
+           };
+
+
+}
 
 //Axios call function block for adding new employee
 async  addEmp() {
@@ -158,7 +175,7 @@ render(){
           <tr>
              <td> <label >Email</label> </td>
              <td> <input type='email'  name='email'  value={this.state.email}
-                    onChange={this.changeHandler} required></input>
+                    onChange={  this.changeHandler }required></input>
              </td>
           </tr>     
           <tr>
@@ -176,7 +193,7 @@ render(){
           </tr>
           <tr>
              <td></td>
-             <td><input type='button' style={showButtonDown} value={this.state.buttonState} onClick={this.updateDelEmployee}/></td>
+             <td><input type='button' style={showButtonDown} value={this.state.buttonState } onClick={  this.wrapperFunction }/></td>
           </tr> 
         </tbody>   
       </table> <br/>

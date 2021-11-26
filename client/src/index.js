@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const GENDER_DEFAULT='Female';
+
 ReactDOM.render(
+
   <React.StrictMode>
-    <App />
+    <App gender={GENDER_DEFAULT}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
